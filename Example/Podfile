@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'SCRAM-Swift_Example' do
+  pod 'SCRAM-Swift', :path => '../'
+
+  target 'SCRAM-Swift_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
