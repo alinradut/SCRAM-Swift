@@ -14,4 +14,4 @@ script:
 
 - set -o pipefail && xcodebuild test -workspace Example/SCRAM-Swift.xcworkspace -scheme SCRAM-Swift_Tests -destination 'platform=iOS Simulator,name=iPhone 11 Pro' -configuration Debug CODE_SIGNING_ALLOWED=NO | xcpretty -c
 
-- pod lib lint
+- pod lib lint --allow-warnings
