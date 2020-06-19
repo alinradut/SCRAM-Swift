@@ -28,8 +28,9 @@ A basic SCRAM implementation in Swift. Supports SHA1, SHA256 and SHA512.
   s.source           = { :git => 'https://github.com/alinradut/SCRAM-Swift.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
+  s.swift_version = '5.0'
   s.ios.deployment_target = '8.0'
-
+  
   s.source_files = 'SCRAM-Swift/Classes/**/*'
   
   # s.resource_bundles = {
