@@ -1,0 +1,16 @@
+PODS:
+  - SCRAM-Swift (0.1.0)
+
+DEPENDENCIES:
+  - SCRAM-Swift (from `../`)
+
+EXTERNAL SOURCES:
+  SCRAM-Swift:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SCRAM-Swift: 665e75b46b6ce297f83f87af12f652d86719ab60
+
+PODFILE CHECKSUM: d7f55a44d3fbafc9a8b5d94b0b1e646afe60fbe7
+
+COCOAPODS: 1.9.3

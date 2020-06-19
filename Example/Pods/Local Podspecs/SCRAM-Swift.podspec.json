@@ -1,0 +1,22 @@
+{
+  "name": "SCRAM-Swift",
+  "version": "0.1.0",
+  "summary": "A short description of SCRAM-Swift.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/Alin Radut/SCRAM-Swift",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Alin Radut": "alin.claudiu.radut@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/Alin Radut/SCRAM-Swift.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "SCRAM-Swift/Classes/**/*"
+}

@@ -41,11 +41,11 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7B3791828F1375F2A0B315B0 /* Pods_SCRAM_Swift_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SCRAM_Swift_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FBF0B3C74A1110CA18A1F32 /* Pods-SCRAM-Swift_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SCRAM-Swift_Tests.release.xcconfig"; path = "Target Support Files/Pods-SCRAM-Swift_Tests/Pods-SCRAM-Swift_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		88B5273F056E2756ACEC8A5C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		88B5273F056E2756ACEC8A5C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		9D3878FFDEB1DDB1EAE7C0E7 /* Pods-SCRAM-Swift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SCRAM-Swift_Example.debug.xcconfig"; path = "Target Support Files/Pods-SCRAM-Swift_Example/Pods-SCRAM-Swift_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		9E0C7CBC5C4A87C919B81DB6 /* SCRAM-Swift.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = "SCRAM-Swift.podspec"; path = "../SCRAM-Swift.podspec"; sourceTree = "<group>"; };
+		9E0C7CBC5C4A87C919B81DB6 /* SCRAM-Swift.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "SCRAM-Swift.podspec"; path = "../SCRAM-Swift.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B77DF36087B8FBBD3775290B /* Pods_SCRAM_Swift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SCRAM_Swift_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D342F9483B26AE2003C3EDC6 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		D342F9483B26AE2003C3EDC6 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		D92A1A9EC836204AF9F4C403 /* Pods-SCRAM-Swift_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SCRAM-Swift_Tests.debug.xcconfig"; path = "Target Support Files/Pods-SCRAM-Swift_Tests/Pods-SCRAM-Swift_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,7 +156,6 @@
 				D92A1A9EC836204AF9F4C403 /* Pods-SCRAM-Swift_Tests.debug.xcconfig */,
 				7FBF0B3C74A1110CA18A1F32 /* Pods-SCRAM-Swift_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -227,6 +226,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);

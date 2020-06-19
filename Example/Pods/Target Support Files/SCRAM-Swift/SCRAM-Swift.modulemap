@@ -1,0 +1,6 @@
+framework module SCRAM_Swift {
+  umbrella header "SCRAM-Swift-umbrella.h"
+
+  export *
+  module * { export * }
+}

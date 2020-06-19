@@ -1,15 +1,21 @@
 # SCRAM-Swift
 
-[![CI Status](https://img.shields.io/travis/Alin Radut/SCRAM-Swift.svg?style=flat)](https://travis-ci.org/Alin Radut/SCRAM-Swift)
+[![CI Status](https://img.shields.io/travis/alinradut/SCRAM-Swift.svg?style=flat)](https://travis-ci.org/alinradut/SCRAM-Swift)
 [![Version](https://img.shields.io/cocoapods/v/SCRAM-Swift.svg?style=flat)](https://cocoapods.org/pods/SCRAM-Swift)
 [![License](https://img.shields.io/cocoapods/l/SCRAM-Swift.svg?style=flat)](https://cocoapods.org/pods/SCRAM-Swift)
 [![Platform](https://img.shields.io/cocoapods/p/SCRAM-Swift.svg?style=flat)](https://cocoapods.org/pods/SCRAM-Swift)
+
+A basic SCRAM implementation in Swift. Supports SHA1, SHA256 and SHA512.
 
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Requirements
+Test vectors are provided in the Tests.swift.
+
+## Usage
+
+
 
 ## Installation
 
@@ -22,7 +28,7 @@ pod 'SCRAM-Swift'
 
 ## Author
 
-Alin Radut, alin.claudiu.radut@gmail.com
+Alin Radut, cocoapods at alinradut dot ro
 
 ## License
 
