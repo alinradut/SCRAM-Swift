@@ -29,12 +29,14 @@ extension Data {
     /// - Returns: HEX string
     func toHex() -> String {
         var str: String = String()
-        let bytes = (self as NSData).bytes.bindMemory(to: UInt8.self, capacity: self.count)
         let len = self.count
         
-        for index in 0 ..< len {
-            str += String(format: "%02.2X", bytes[index])
+        self.withUnsafeBytes { (selfBytes: UnsafePointer<UInt8>) -> Void in
+            for index in 0..<len {
+                str += String(format: "%02.2X", selfBytes[index])
+            }
         }
+        
         return str
     }
 }
@@ -78,7 +80,9 @@ extension Data {
         var output = Data(count: Int(CC_SHA1_DIGEST_LENGTH))
         
         output.withUnsafeMutableBytes { (bytes) -> Void in
-            CC_SHA1((self as NSData).bytes, CC_LONG(self.count), bytes)
+            self.withUnsafeBytes { (selfBytes) -> Void in
+                CC_SHA1(selfBytes, CC_LONG(self.count), bytes)
+            }
         }
         
         return output
@@ -88,7 +92,9 @@ extension Data {
         var output = Data(count: Int(CC_SHA256_DIGEST_LENGTH))
         
         output.withUnsafeMutableBytes { (bytes) -> Void in
-            CC_SHA256((self as NSData).bytes, CC_LONG(self.count), bytes)
+            self.withUnsafeBytes { (selfBytes) -> Void in
+                CC_SHA256(selfBytes, CC_LONG(self.count), bytes)
+            }
         }
         
         return output
@@ -98,7 +104,9 @@ extension Data {
         var output = Data(count: Int(CC_SHA512_DIGEST_LENGTH))
         
         output.withUnsafeMutableBytes { (bytes) -> Void in
-            CC_SHA512((self as NSData).bytes, CC_LONG(self.count), bytes)
+            self.withUnsafeBytes { (selfBytes) -> Void in
+                CC_SHA512(selfBytes, CC_LONG(self.count), bytes)
+            }
         }
         
         return output
