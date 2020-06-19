@@ -15,25 +15,25 @@ class Tests: XCTestCase {
     
     func testSHA1Vectors() {
         let scram = SCRAM(username: "user", password: "pencil", nonce: "fyko+d2lbbFgONRv9qkxdawL", algorithm: .sha1)
-        try! scram.handleInitialServerMessage("cj1meWtvK2QybGJiRmdPTlJ2OXFreGRhd0wzcmZjTkhZSlkxWlZ2V1ZzN2oscz1RU1hDUitRNnNlazhiZjkyLGk9NDA5Ng==")
+        _ = try! scram.handleInitialServerMessage("cj1meWtvK2QybGJiRmdPTlJ2OXFreGRhd0wzcmZjTkhZSlkxWlZ2V1ZzN2oscz1RU1hDUitRNnNlazhiZjkyLGk9NDA5Ng==")
         XCTAssert(try! scram.handleFinalServerMessage("dj1ybUY5cHFWOFM3c3VBb1pXamE0ZEpSa0ZzS1E9"), "The server signature does not match")
     }
     
     func testSHA1VectorsFail() {
         let scram = SCRAM(username: "user", password: "pencil1", nonce: "fyko+d2lbbFgONRv9qkxdawL", algorithm: .sha1)
-        try! scram.handleInitialServerMessage("cj1meWtvK2QybGJiRmdPTlJ2OXFreGRhd0wzcmZjTkhZSlkxWlZ2V1ZzN2oscz1RU1hDUitRNnNlazhiZjkyLGk9NDA5Ng==")
+        _ = try! scram.handleInitialServerMessage("cj1meWtvK2QybGJiRmdPTlJ2OXFreGRhd0wzcmZjTkhZSlkxWlZ2V1ZzN2oscz1RU1hDUitRNnNlazhiZjkyLGk9NDA5Ng==")
         XCTAssert(try! scram.handleFinalServerMessage("dj1ybUY5cHFWOFM3c3VBb1pXamE0ZEpSa0ZzS1E9") == false, "The server signature does not match")
     }
     
     func testSHA256Vectors() {
         let scram = SCRAM(username: "user", password: "pencil", nonce: "rOprNGfwEbeRWgbNEkqO", algorithm: .sha256)
-        try! scram.handleInitialServerMessage("cj1yT3ByTkdmd0ViZVJXZ2JORWtxTyVodllEcFdVYTJSYVRDQWZ1eEZJbGopaE5sRiRrMCxzPVcyMlphSjBTTlk3c29Fc1VFamI2Z1E9PSxpPTQwOTY=")
+        _ = try! scram.handleInitialServerMessage("cj1yT3ByTkdmd0ViZVJXZ2JORWtxTyVodllEcFdVYTJSYVRDQWZ1eEZJbGopaE5sRiRrMCxzPVcyMlphSjBTTlk3c29Fc1VFamI2Z1E9PSxpPTQwOTY=")
         XCTAssert(try! scram.handleFinalServerMessage("dj02cnJpVFJCaTIzV3BSUi93dHVwK21NaFVaVW4vZEI1bkxUSlJzamw5NUc0PQ=="), "The server signature does not match")
     }
     
     func testSHA256VectorsFail() {
         let scram = SCRAM(username: "user", password: "pencil1", nonce: "rOprNGfwEbeRWgbNEkqO", algorithm: .sha256)
-        try! scram.handleInitialServerMessage("cj1yT3ByTkdmd0ViZVJXZ2JORWtxTyVodllEcFdVYTJSYVRDQWZ1eEZJbGopaE5sRiRrMCxzPVcyMlphSjBTTlk3c29Fc1VFamI2Z1E9PSxpPTQwOTY=")
+        _ = try! scram.handleInitialServerMessage("cj1yT3ByTkdmd0ViZVJXZ2JORWtxTyVodllEcFdVYTJSYVRDQWZ1eEZJbGopaE5sRiRrMCxzPVcyMlphSjBTTlk3c29Fc1VFamI2Z1E9PSxpPTQwOTY=")
         XCTAssert(try! scram.handleFinalServerMessage("dj02cnJpVFJCaTIzV3BSUi93dHVwK21NaFVaVW4vZEI1bkxUSlJzamw5NUc0PQ==") == false, "The server signature does not match")
     }
 }
