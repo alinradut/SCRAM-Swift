@@ -2,7 +2,7 @@
 
 [![CI Status](https://img.shields.io/travis/alinradut/SCRAM-Swift.svg?style=flat)](https://travis-ci.org/alinradut/SCRAM-Swift)
 [![Version](https://img.shields.io/cocoapods/v/SCRAM-Swift.svg?style=flat)](https://cocoapods.org/pods/SCRAM-Swift)
-[![License](https://img.shields.io/cocoapods/l/SCRAM-Swift.svg?style=flat)](https://cocoapods.org/pods/SCRAM-Swift)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Platform](https://img.shields.io/cocoapods/p/SCRAM-Swift.svg?style=flat)](https://cocoapods.org/pods/SCRAM-Swift)
 
 A basic SCRAM implementation in Swift. Supports SHA1, SHA256 and SHA512.
