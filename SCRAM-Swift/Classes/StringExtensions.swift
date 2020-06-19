@@ -35,6 +35,6 @@ extension String {
     /// Convert the current string to HEX (via a Data object)
     /// - Returns: HEX string
     func toHex() -> String {
-        self.data(using: .utf8)!.toHex()
+        return self.data(using: .utf8)!.toHex()
     }
 }
