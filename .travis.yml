@@ -10,5 +10,8 @@ language: swift
 # - gem install cocoapods # Since Travis is not always on latest version
 # - pod install --project-directory=Example
 script:
-- set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace Example/SCRAM-Swift.xcworkspace -scheme SCRAM-Swift-Example -sdk iphonesimulator13.0 ONLY_ACTIVE_ARCH=NO | xcpretty
+- set -o pipefail && xcodebuild build -workspace Example/SCRAM-Swift.xcworkspace -scheme SCRAM-Swift-Example -sdk iphonesimulator PLATFORM_NAME=iphonesimulator -configuration Debug | xcpretty -c
+
+- set -o pipefail && xcodebuild test -workspace Example/SCRAM-Swift.xcworkspace -scheme SCRAM-Swift_Tests -destination 'platform=iOS Simulator,name=iPhone 11 Pro' -configuration Debug CODE_SIGNING_ALLOWED=NO | xcpretty -c
+
 - pod lib lint
