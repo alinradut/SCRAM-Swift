@@ -69,6 +69,7 @@ open class SCRAM {
     
     public struct InitialClientMessage {
         
+        /// Plaintext message
         public var message: String {
             return [
                 SCRAM.initialMessageHeader,
@@ -83,7 +84,8 @@ open class SCRAM {
             ].joined(separator: ",")
         }
         
-        var base64Encoded: String {
+        /// Base64 encoded `message`. This shoul be sent to the server.
+        public var base64EncodedMessage: String {
             return message.data(using: .utf8)!.base64EncodedString()
         }
         

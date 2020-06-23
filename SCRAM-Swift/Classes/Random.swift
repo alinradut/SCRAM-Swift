@@ -27,7 +27,9 @@ public struct Random {
     /// - Parameter length: Number of characters to generate.
     /// - Returns: String
     public static func string(of length: Int) -> String {
-        let data = self.data(of: length)
-        return String(data: data, encoding: .ascii)!
+        let randomBytes = [UInt8](self.data(of: length))
+        let characters: [Character] = stride(from: 33, to: 127, by: 1).map({ Character(UnicodeScalar($0 as UInt8)) })
+        let output: [Character] = randomBytes.map({ characters[Int($0) % characters.count] })
+        return String(output)
     }
 }
