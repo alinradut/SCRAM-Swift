@@ -136,6 +136,11 @@ open class SCRAM {
         
         public var message: String!
         
+        /// Base64 encoded `message`. This shoul be sent to the server.
+        public var base64EncodedMessage: String {
+            return message.data(using: .utf8)!.base64EncodedString()
+        }
+        
         var serverNonce: String
         var serverSignature: Data
                 
