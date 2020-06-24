@@ -8,6 +8,13 @@
 import Foundation
 import CommonCrypto
 
+func trace(_ key: String, _ value: Any) {
+    guard SCRAM.debug else {
+        return
+    }
+    print("\(key): \(value)")
+}
+
 /// Hash algorithm to use with SCRAM.
 public enum HashAlgorithm {
     
@@ -128,6 +135,10 @@ open class SCRAM {
             self.salt = salt
             self.iterations = iterations
             
+            trace("server nonce", serverNonce)
+            trace("salt", salt.toHex())
+            trace("iterations", iterations)
+            
             self.challenge = challenge
         }
     }
@@ -152,20 +163,35 @@ open class SCRAM {
             let saltData = serverChallenge.salt
             let hashAlgo = initialMessage.algorithm
             let saltedPassword: Data = passwordData.derive(salt: saltData, algorithm: hashAlgo, iterations: serverChallenge.iterations)
+            trace("salted password", saltedPassword.toHex())
 
             let clientKeyData = saltedPassword.hmac(key: "Client Key", algorithm: hashAlgo)
             let clientKey = clientKeyData
+            trace("client key", clientKey.toHex())
+            
             let storedKey = clientKeyData.hash(algorithm: hashAlgo)
+            trace("stored key", storedKey.toHex())
             
             let bare: String = SCRAM.finalMessageHeader + ",r=" + serverNonce
+            trace("final client message bare", bare)
             
             let authMessage = [initialMessage.bare, serverChallenge.challenge, bare].joined(separator: ",")
-            let clientSignature = storedKey.hmac(key: authMessage, algorithm: hashAlgo)
-            let clientProof = clientKey.xored(with: clientSignature)
+            trace("auth message", authMessage)
             
+            let clientSignature = storedKey.hmac(key: authMessage, algorithm: hashAlgo)
+            trace("client signature", clientSignature.toHex())
+
+            let clientProof = clientKey.xored(with: clientSignature)
+            trace("client proof", clientProof.toHex())
+
             let serverKey = saltedPassword.hmac(key: "Server Key", algorithm: hashAlgo)
+            trace("server key", serverKey.toHex())
+            
             serverSignature = serverKey.hmac(key: authMessage, algorithm: hashAlgo)
+            trace("server signature", serverSignature.toHex())
+            
             let clientFinalMessage = bare + ",p=" + clientProof.base64EncodedString()
+            trace("client final message", clientFinalMessage)
             
             message = clientFinalMessage
         }
@@ -176,6 +202,7 @@ open class SCRAM {
     public static let nonceLength: Int              = 24
     public static let initialMessageHeader: String  = "n,"
     public static let finalMessageHeader: String    = "c=biws"
+    public static var debug: Bool                   = false
     
     public var initialMessage: InitialClientMessage
     public var finalClientMessage: FinalClientMessage?
@@ -189,6 +216,8 @@ open class SCRAM {
     public init(username: String, password: String,
                 nonce: String = Random.string(of: SCRAM.nonceLength), algorithm: HashAlgorithm) {
         initialMessage = InitialClientMessage(username: username, password: password, nonce: nonce, algorithm: algorithm)
+        trace("initial client message", initialMessage.base64EncodedMessage)
+        trace("initial client message decoded", initialMessage.message)
     }
     
     /// Parse initial server message and produce the final client message.
@@ -231,7 +260,11 @@ open class SCRAM {
         guard let finalClientMessage = self.finalClientMessage else {
             throw SCRAMError.invalidState
         }
-        
+        trace("final server message", base64Message)
+        trace("decoded final server message", finalMessage)
+        if finalClientMessage.serverSignature != receivedServerSignature {
+            trace("server signatures do not match", "\(finalClientMessage.serverSignature.toHex()) != \(receivedServerSignature.toHex())")
+        }
         return finalClientMessage.serverSignature == receivedServerSignature
     }
 }

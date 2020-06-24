@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCRAM_Swift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        SCRAM.debug = true
+        let scram = SCRAM(username: "user", password: "pencil", nonce: "fyko+d2lbbFgONRv9qkxdawL", algorithm: .sha1)
+        let finalClientMessage = try! scram.handleInitialServerMessage("cj1meWtvK2QybGJiRmdPTlJ2OXFreGRhd0wzcmZjTkhZSlkxWlZ2V1ZzN2oscz1RU1hDUitRNnNlazhiZjkyLGk9NDA5Ng==")
+        let serverSignatureMatch = try! scram.handleFinalServerMessage("dj1ybUY5cHFWOFM3c3VBb1pXamE0ZEpSa0ZzS1E9")
+        
         return true
     }
 
