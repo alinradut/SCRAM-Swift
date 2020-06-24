@@ -20,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         SCRAM.debug = true
         let scram = SCRAM(username: "user", password: "pencil", nonce: "fyko+d2lbbFgONRv9qkxdawL", algorithm: .sha1)
-        let finalClientMessage = try! scram.handleInitialServerMessage("cj1meWtvK2QybGJiRmdPTlJ2OXFreGRhd0wzcmZjTkhZSlkxWlZ2V1ZzN2oscz1RU1hDUitRNnNlazhiZjkyLGk9NDA5Ng==")
-        let serverSignatureMatch = try! scram.handleFinalServerMessage("dj1ybUY5cHFWOFM3c3VBb1pXamE0ZEpSa0ZzS1E9")
+        _ = try! scram.handleInitialServerMessage("cj1meWtvK2QybGJiRmdPTlJ2OXFreGRhd0wzcmZjTkhZSlkxWlZ2V1ZzN2oscz1RU1hDUitRNnNlazhiZjkyLGk9NDA5Ng==")
+        _ = try! scram.handleFinalServerMessage("dj1ybUY5cHFWOFM3c3VBb1pXamE0ZEpSa0ZzS1E9")
         
         return true
     }
