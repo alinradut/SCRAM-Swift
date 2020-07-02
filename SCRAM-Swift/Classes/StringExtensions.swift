@@ -37,4 +37,8 @@ extension String {
     func toHex() -> String {
         return self.data(using: .utf8)!.toHex()
     }
+    
+    public func hmac(key: Data, algorithm: HashAlgorithm) -> Data {
+        self.data(using: .utf8)!.hmac(key: key, algorithm: algorithm)
+    }
 }

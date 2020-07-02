@@ -22,7 +22,7 @@ public enum HashAlgorithm {
     case sha256
     case sha512
     
-    var hmac: CCHmacAlgorithm {
+    public var hmac: CCHmacAlgorithm {
         switch self {
         case .sha1:
             return CCHmacAlgorithm(kCCHmacAlgSHA1)
@@ -33,7 +33,7 @@ public enum HashAlgorithm {
         }
     }
     
-    var algo: Int {
+    public var algo: Int {
         switch self {
         case .sha1:
             return kCCPRFHmacAlgSHA1
@@ -44,7 +44,7 @@ public enum HashAlgorithm {
         }
     }
     
-    var digestLength: Int32 {
+    public var digestLength: Int32 {
         switch self {
         case .sha1:
             return CC_SHA1_DIGEST_LENGTH
@@ -55,7 +55,7 @@ public enum HashAlgorithm {
         }
     }
     
-    var prf: CCPseudoRandomAlgorithm {
+    public var prf: CCPseudoRandomAlgorithm {
         switch self {
         case .sha1:
             return CCPseudoRandomAlgorithm(kCCPRFHmacAlgSHA1)
@@ -165,31 +165,31 @@ open class SCRAM {
             let saltedPassword: Data = passwordData.derive(salt: saltData, algorithm: hashAlgo, iterations: serverChallenge.iterations)
             trace("salted password", saltedPassword.toHex())
 
-            let clientKeyData = saltedPassword.hmac(key: "Client Key", algorithm: hashAlgo)
+            let clientKeyData = "Client Key".hmac(key: saltedPassword, algorithm: hashAlgo)
             let clientKey = clientKeyData
             trace("client key", clientKey.toHex())
             
             let storedKey = clientKeyData.hash(algorithm: hashAlgo)
             trace("stored key", storedKey.toHex())
-            
+
             let bare: String = SCRAM.finalMessageHeader + ",r=" + serverNonce
             trace("final client message bare", bare)
-            
+
             let authMessage = [initialMessage.bare, serverChallenge.challenge, bare].joined(separator: ",")
             trace("auth message", authMessage)
-            
-            let clientSignature = storedKey.hmac(key: authMessage, algorithm: hashAlgo)
+
+            let clientSignature = authMessage.hmac(key: storedKey, algorithm: hashAlgo)
             trace("client signature", clientSignature.toHex())
 
             let clientProof = clientKey.xored(with: clientSignature)
             trace("client proof", clientProof.toHex())
 
-            let serverKey = saltedPassword.hmac(key: "Server Key", algorithm: hashAlgo)
+            let serverKey = "Server Key".hmac(key: saltedPassword, algorithm: hashAlgo)
             trace("server key", serverKey.toHex())
-            
-            serverSignature = serverKey.hmac(key: authMessage, algorithm: hashAlgo)
+
+            serverSignature = authMessage.hmac(key: serverKey, algorithm: hashAlgo)
             trace("server signature", serverSignature.toHex())
-            
+
             let clientFinalMessage = bare + ",p=" + clientProof.base64EncodedString()
             trace("client final message", clientFinalMessage)
             

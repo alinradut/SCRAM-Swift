@@ -27,7 +27,7 @@ extension Data {
     
     /// Convert data to a HEX string.
     /// - Returns: HEX string
-    func toHex() -> String {
+    public func toHex() -> String {
         var str: String = String()
         let len = self.count
         
@@ -47,7 +47,7 @@ extension Data {
     ///   - key: Key
     ///   - algorithm: Hash algorithm
     /// - Returns: Hmac
-    func hmac(key: String, algorithm: HashAlgorithm) -> Data {
+    public func hmac(key: Data, algorithm: HashAlgorithm) -> Data {
         var output = Data(count: Int(algorithm.digestLength))
         let count = output.count
         
@@ -55,13 +55,13 @@ extension Data {
             let outputBytes = umrbp.baseAddress!.bindMemory(to: UInt8.self, capacity: count)
             CCHmac(
                 algorithm.hmac,
+                [UInt8](key),
+                key.count,
                 [UInt8](self),
                 self.count,
-                key,
-                key.count,
                 outputBytes)
         }
-
+        
         return output
     }
     
