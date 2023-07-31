@@ -25,10 +25,11 @@ public struct Random {
     
     /// Generate a random string of `length` characters
     /// - Parameter length: Number of characters to generate.
+    /// - Parameter excludeCharacters: Characters to exclude. Defaults to "," (comma).
     /// - Returns: String
-    public static func string(of length: Int) -> String {
+    public static func string(of length: Int, excludeCharacters: [Character] = [","]) -> String {
         let randomBytes = [UInt8](self.data(of: length))
-        let characters: [Character] = stride(from: 33, to: 127, by: 1).map({ Character(UnicodeScalar($0 as UInt8)) })
+        let characters: [Character] = stride(from: 33, to: 127, by: 1).map({ Character(UnicodeScalar($0 as UInt8)) }).filter({ !excludeCharacters.contains($0) })
         let output: [Character] = randomBytes.map({ characters[Int($0) % characters.count] })
         return String(output)
     }

@@ -36,9 +36,18 @@ class Tests: XCTestCase {
         _ = try! scram.handleInitialServerMessage("cj1yT3ByTkdmd0ViZVJXZ2JORWtxTyVodllEcFdVYTJSYVRDQWZ1eEZJbGopaE5sRiRrMCxzPVcyMlphSjBTTlk3c29Fc1VFamI2Z1E9PSxpPTQwOTY=")
         XCTAssert(try! scram.handleFinalServerMessage("dj02cnJpVFJCaTIzV3BSUi93dHVwK21NaFVaVW4vZEI1bkxUSlJzamw5NUc0PQ==") == false, "The server signature does not match")
     }
-    
+
     func testNonceGeneration() {
         let nonce = Random.string(of: SCRAM.nonceLength)
         XCTAssert(nonce.count == SCRAM.nonceLength)
+    }
+
+    func testNonceGenerationInvalidCharacters() {
+
+        DispatchQueue.concurrentPerform(iterations: 1_000_000) { _ in
+            let nonce = Random.string(of: SCRAM.nonceLength)
+            XCTAssert(nonce.count == SCRAM.nonceLength)
+            XCTAssertFalse(nonce.contains(","))
+        }
     }
 }
