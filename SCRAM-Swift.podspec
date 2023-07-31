@@ -29,7 +29,7 @@ A basic SCRAM implementation in Swift. Supports SHA1, SHA256 and SHA512.
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.swift_version = '5.0'
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '11.0'
   
   s.source_files = 'SCRAM-Swift/Classes/**/*'
   
